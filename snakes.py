@@ -3,7 +3,6 @@ from pygame import mixer
 import random
 import time
 import os
-import whitenoise
 
 WHITE = (255, 255, 255)
 BLACK = (0,0,0)
