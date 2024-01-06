@@ -2,7 +2,7 @@ import pygame
 from pygame import mixer
 import random
 import time
-
+import os
 import whitenoise
 
 WHITE = (255, 255, 255)
@@ -52,9 +52,14 @@ def game_loop():
     snake_list = []
     global exit_game
     exit_game = False
-
-    with open ("high_score.txt", "r") as f:
-        high_score = f.read()
+    if os.path.exists(".high_score.txt"):
+        with open (".high_score.txt", "r") as f:
+            high_score = f.read()
+    else:
+        with open (".high_score.txt", "w") as f:
+            high_score = f.write("0")
+        with open (".high_score.txt", "r") as f:
+            high_score = f.read()
     high_score = int(high_score)
     mixer.music.load("game_music.mp3")
     mixer.music.set_volume(1)
@@ -122,7 +127,7 @@ def game_loop():
             text_on_screen(f"Hit Spacebar to continue", CYAN, 30, screen_width/2 - 190, screen_height/2 + 60, True, False)
             if score > high_score:
                 text_on_screen(f"NEW HIGH SCORE!!!", YELLOW, 30, screen_width/2 - 170, screen_height/2, True, False)
-                with open("high_score.txt", "w") as f:
+                with open(".high_score.txt", "w") as f:
                     f.write(str(score))
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
