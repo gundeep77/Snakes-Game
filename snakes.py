@@ -114,10 +114,7 @@ def game_loop():
                     pygame.draw.rect(screen, WHITE, pygame.Rect(x, y, snake_size, snake_size))
 
                 text_on_screen(f"Score: {score}", GREEN, 30, 20, 20, True, True)
-                if score >= high_score:
-                    text_on_screen(f"High Score: {score}", GREEN, 30, 200, 20, True, True)
-                else:
-                    text_on_screen(f"High Score: {high_score}", GREEN, 30, 200, 20, True, True)
+                text_on_screen(f"High Score: {high_score}", GREEN, 30, 200, 20, True, True)
             
         else:
             screen.fill(MONOKAI)
