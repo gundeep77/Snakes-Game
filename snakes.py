@@ -19,6 +19,7 @@ screen_width, screen_height = 800, 600
 
 pygame.init()
 mixer.init()
+make_sound = mixer.Sound("eat_food.wav")
 
 welcome_image = pygame.image.load("snake.png")
 screen = pygame.display.set_mode((screen_width, screen_height))
@@ -86,6 +87,8 @@ def game_loop():
                 game_over = True
             else:
                 if abs(snake_x - food_x) < eat_threshold and abs(snake_y - food_y) < eat_threshold:
+                    make_sound.set_volume(0.7)
+                    make_sound.play()
                     food_x = random.randint(snake_size + 10, screen_width - snake_size)
                     food_y = random.randint(50, screen_height - snake_size - 10)
                     score += 5
@@ -103,12 +106,12 @@ def game_loop():
                     snake_list.pop(0)
 
                 # if the snake collapses in on itself
-                if head in snake_list[:len(snake_list) - 1]:
-                    mixer.music.fadeout(500)
-                    mixer.music.load("game_over_music.mp3")
-                    mixer.music.set_volume(0.2)
-                    mixer.music.play()
-                    game_over = True
+                # if head in snake_list[:len(snake_list) - 1]:
+                #     mixer.music.fadeout(500)
+                #     mixer.music.load("game_over_music.mp3")
+                #     mixer.music.set_volume(0.2)
+                #     mixer.music.play()
+                #     game_over = True
                 pygame.draw.rect(screen, RED, pygame.Rect(food_x, food_y, snake_size, snake_size))
                 for x,y in snake_list:
                     pygame.draw.rect(screen, WHITE, pygame.Rect(x, y, snake_size, snake_size))
